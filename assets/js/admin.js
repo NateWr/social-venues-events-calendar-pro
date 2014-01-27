@@ -8,11 +8,16 @@ jQuery(document).ready(function ($) {
 
 		// Register click event on new delete link
 		$('.svecp-delete').click( function() {
-			console.log('click');
 			$(this).parent().parent().remove();
 			return false;
 		});
 
+		return false;
+	});
+
+	// Register click event on delete links displayed at page load
+	$('.svecp-delete').click( function() {
+		$(this).parent().parent().remove();
 		return false;
 	});
 
