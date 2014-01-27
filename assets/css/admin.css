@@ -1,0 +1,22 @@
+/* Social Venues for Events Calendar Pro: Admin area */
+#svecp_social_profiles .svecp_service {
+	padding-bottom: 1em;
+	margin-bottom: 1em;
+	border-bottom: 1px solid #eee;
+}
+#svecp_social_profiles label,
+#svecp_social_profiles input[type="text"],
+#svecp_social_profiles select,
+#svecp_social_profiles p {
+	margin: 1em;
+	display: block;
+}
+#svecp_social_profiles label {
+	font-weight: bold;
+}
+#svecp_social_profiles .svecp-delete {
+	color: #a00;
+}
+#svecp_social_profiles .svecp-delete:hover {
+	color: red;
+}
