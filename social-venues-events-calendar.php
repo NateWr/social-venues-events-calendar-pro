@@ -85,7 +85,7 @@ class SVECP_Social_Venues {
 			),
 			'google_plus'	=> array(
 				'label'				=> __( 'Google Plus', SVECP_TEXTDOMAIN ),
-				'html'				=> '<i class="fa fa-2x fa-google_plus"></i>'
+				'html'				=> '<i class="fa fa-2x fa-google-plus"></i>'
 			),
 			'youtube'		=> array(
 				'label'				=> __( 'YouTube', SVECP_TEXTDOMAIN ),
@@ -153,7 +153,7 @@ class SVECP_Social_Venues {
 		global $post;
 
 		// Define and filter defaults
-		$this->meta_data['layout'] = 'svecp_icons';
+		$this->meta_data['layout'] = 'icons';
 		$this->meta_data['profiles'] = array();
 
 		$this->meta_data = apply_filters( 'svecp_default_metadata', $this->meta_data );
@@ -197,10 +197,10 @@ class SVECP_Social_Venues {
 		<h3><?php _e( 'Display Settings', SVECP_TEXTDOMAIN ); ?></h3>
 
 		<label for="svecp_icons">
-			<input type="radio" id="svecp_icons" name="svecp[layout]" value="icons"<?php if ( $this->meta_data['layout'] == 'svecp_icons' ) : ?> checked<?php endif; ?>> <?php _e( 'Icons only', SVECP_TEXTDOMAIN ); ?>
+			<input type="radio" id="svecp_icons" name="svecp[layout]" value="icons"<?php if ( $this->meta_data['layout'] == 'icons' ) : ?> checked<?php endif; ?>> <?php _e( 'Icons only', SVECP_TEXTDOMAIN ); ?>
 		</label>
 		<label for="svecp_text">
-			<input type="radio" id="svecp_text" name="svecp[layout]" value="text"<?php if ( $this->meta_data['layout'] == 'svecp_text' ) : ?> checked<?php endif; ?>> <?php _e( 'Icons with labels', SVECP_TEXTDOMAIN ); ?>
+			<input type="radio" id="svecp_text" name="svecp[layout]" value="text"<?php if ( $this->meta_data['layout'] == 'text' ) : ?> checked<?php endif; ?>> <?php _e( 'Icons with labels', SVECP_TEXTDOMAIN ); ?>
 		</label>
 
 		<h3><?php _e( 'Social Profiles', SVECP_TEXTDOMAIN ); ?></h3>
@@ -334,11 +334,22 @@ class SVECP_Social_Venues {
 		<?php
 		foreach( $this->meta_data['profiles'] as $profile ) :
 			if ( isset( $this->services[$profile['network']] ) ) :
-			?>
+				if( $this->meta_data['layout'] == 'icons' ) :
+				?>
 
 			<a class="svecp-icon svecp-network-<?php echo esc_attr( $profile['network'] ); ?>" href="<?php echo esc_url( $profile['url'] ); ?>" title="Follow us on <?php echo esc_attr( $profile['label'] ); ?>"><?php echo $this->services[$profile['network']]['html']; ?></a>
 
-			<?php
+				<?php elseif ( $this->meta_data['layout'] == 'text' ) : ?>
+			
+			<p>
+				<a class="svecp-icon svecp-network-<?php echo esc_attr( $profile['network'] ); ?>" href="<?php echo esc_url( $profile['url'] ); ?>" title="Follow us on <?php echo esc_attr( $profile['label'] ); ?>"><?php echo $this->services[$profile['network']]['html']; ?></a>
+				<a class="svecp-icon svecp-network-<?php echo esc_attr( $profile['network'] ); ?>" href="<?php echo esc_url( $profile['url'] ); ?>" title="Follow us on <?php echo esc_attr( $profile['label'] ); ?>">
+					<?php echo $profile['label']; ?>
+				</a>
+			</p>
+			
+				<?php
+				endif;
 			endif;
 		endforeach; ?>
 
