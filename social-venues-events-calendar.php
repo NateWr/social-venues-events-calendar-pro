@@ -368,7 +368,7 @@ class SVECP_Social_Venues {
 
 			<p>
 				<a class="svecp-icon svecp-network-<?php echo esc_attr( $profile['network'] ); ?>" href="<?php echo esc_url( $profile['url'] ); ?>" title="Follow us on <?php echo esc_attr( $profile['label'] ); ?>"><?php echo $this->services[$profile['network']]['html']; ?></a>
-				<a class="svecp-icon svecp-network-<?php echo esc_attr( $profile['network'] ); ?>" href="<?php echo esc_url( $profile['url'] ); ?>" title="Follow us on <?php echo esc_attr( $profile['label'] ); ?>">
+				<a class="svecp-text svecp-network-<?php echo esc_attr( $profile['network'] ); ?>" href="<?php echo esc_url( $profile['url'] ); ?>" title="Follow us on <?php echo esc_attr( $profile['label'] ); ?>">
 					<?php echo $profile['label']; ?>
 				</a>
 			</p>
