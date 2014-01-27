@@ -47,6 +47,7 @@ class SVECP_Social_Venues {
 		// Init
 		add_action( 'init', array( $this, 'load_textdomain' ) );
 		add_action( 'init', array( $this, 'define_services' ) );
+		add_action( 'init', array( $this, 'check_dependencies' ) );
 
 		// Handle Meta Boxes
 		add_action( 'add_meta_boxes', array( $this, 'add_meta_boxes' ) );
@@ -123,6 +124,30 @@ class SVECP_Social_Venues {
 
 		$this->services = apply_filters( 'svecp_services', $this->services );
 
+	}
+
+	/**
+	 * Check if Events Calendar Pro is activated
+	 * @since 1.0
+	 */
+	public function check_dependencies() {
+		if ( !is_plugin_active( 'events-calendar-pro/events-calendar-pro.php' ) ) {
+			add_action( 'admin_notices', array( $this, 'missing_events_calendar_pro' ) );
+		}
+	}
+
+	/**
+	 * Add admin notice if Events Calendar Pro is not active
+	 * @since 1.0
+	 */
+	public function missing_events_calendar_pro() {
+		?>
+		<div class="error">
+			<p>
+				<strong>Events Calendar Pro</strong> must be installed and activated in order for <strong>Social Venues for Events Calendar Pro</strong> to work properly. Please activate Events Calendar Pro below. If you do not have it yet, it can be purchased at <a href="http://tri.be/shop/wordpress-events-calendar-pro/" title="Purchase Events Calendar Pro">Modern Tribe</a>.
+			</p>
+		</div>
+		<?php
 	}
 
 	/**
@@ -340,14 +365,14 @@ class SVECP_Social_Venues {
 			<a class="svecp-icon svecp-network-<?php echo esc_attr( $profile['network'] ); ?>" href="<?php echo esc_url( $profile['url'] ); ?>" title="Follow us on <?php echo esc_attr( $profile['label'] ); ?>"><?php echo $this->services[$profile['network']]['html']; ?></a>
 
 				<?php elseif ( $this->meta_data['layout'] == 'text' ) : ?>
-			
+
 			<p>
 				<a class="svecp-icon svecp-network-<?php echo esc_attr( $profile['network'] ); ?>" href="<?php echo esc_url( $profile['url'] ); ?>" title="Follow us on <?php echo esc_attr( $profile['label'] ); ?>"><?php echo $this->services[$profile['network']]['html']; ?></a>
 				<a class="svecp-icon svecp-network-<?php echo esc_attr( $profile['network'] ); ?>" href="<?php echo esc_url( $profile['url'] ); ?>" title="Follow us on <?php echo esc_attr( $profile['label'] ); ?>">
 					<?php echo $profile['label']; ?>
 				</a>
 			</p>
-			
+
 				<?php
 				endif;
 			endif;
