@@ -13,7 +13,7 @@ Add social media profiles to venues in Events Calendar Pro. This plugin requires
 
 **This plugin requires the [Events Calendar Pro](http://tri.be/shop/wordpress-events-calendar-pro/ "Purchase Events Calendar Pro") plugin by Modern Tribe.**
 
-Add social media profiles to venues in Events Calendar Pro. Assign any number of profiles to Facebook, Twitter and more, and this plugin will automatically add linked icons to the description of the venue on the venue's page.
+Add social media profiles to venues in Events Calendar Pro. Add links to a venue's profiles on Facebook, Twitter and more. These profiles will automatically be displayed on the venue's page.
 
 This plugin adds a new meta box to the venue editing page, which allows you to add and edit social media profiles. By default, it supports the following social networks:
 
