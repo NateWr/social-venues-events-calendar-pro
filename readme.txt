@@ -51,7 +51,7 @@ However, this plugin provides filters so you can easily customize and extend it 
 
 Read the FAQ page for a few tips and [get in touch](http://themeofthecrop.com/support/?utm_source=Plugin&utm_medium=Plugin%20Description&utm_campaign=Social%20Venues%20for%20Events%20Calendar "Support at Theme of the Crop") if you have any questions.
 
-This plugin is [on GitHub](https://github.com/NateWr/social-venues-events-calendar "Social Venues for Events Calendar Pro on GitHub"), so fork it up.
+This plugin is [on GitHub](https://github.com/NateWr/social-venues-events-calendar-pro "Social Venues for Events Calendar Pro on GitHub"), so fork it up.
 
 == Installation ==
 
