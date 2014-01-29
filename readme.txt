@@ -5,7 +5,7 @@ Plugin URL: http://themeofthecrop.com
 Tags: calendar, class, concert, conference, date, dates, event, events, google maps, meeting, modern tribe, Organizer, seminar, summit, tribe, venue, widget, workshop
 Requires at least: 3.8
 Tested up to: 3.8.1
-Stable tag: 1.0
+Stable tag: 1.0.1
 License: GPLv2 or later
 Donate link: http://themeofthecrop.com
 
@@ -142,6 +142,9 @@ What do you want? I think this plugin works best if it's kept nice and simple, b
 3. Adding new profiles on the venue page
 
 == Changelog ==
+
+= 1.0.1 (2014-01-29) =
+* Version bump to fix issues in WordPress repository
 
 = 1.0 (2014-01-27) =
 * Initial release
