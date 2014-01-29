@@ -3,7 +3,7 @@
  * Plugin Name: Social Venues for Events Calendar Pro
  * Plugin URI: http://themeofthecrop.com
  * Description: Adds social media buttons to venue pages in Events Calendar Pro. Requires Events Calendar and Events Calendar Pro by Modern Tribe.
- * Version: 1.0
+ * Version: 1.0.2
  * Author: Nate Wright
  * Author URI: https://github.com/NateWr
  * Requires at least: 3.8
