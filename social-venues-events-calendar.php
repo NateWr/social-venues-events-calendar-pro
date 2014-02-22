@@ -3,7 +3,7 @@
  * Plugin Name: Social Venues for Events Calendar Pro
  * Plugin URI: http://themeofthecrop.com
  * Description: Adds social media buttons to venue pages in Events Calendar Pro. Requires Events Calendar and Events Calendar Pro by Modern Tribe.
- * Version: 1.0.2
+ * Version: 1.1
  * Author: Nate Wright
  * Author URI: https://github.com/NateWr
  * Requires at least: 3.8
@@ -58,7 +58,7 @@ class SVECP_Social_Venues {
 		add_action( 'wp_enqueue_scripts', array( $this, 'register_assets' ) );
 
 		// Admin scripts and styles
-		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_assets' ) );
+		add_action( 'admin_enqueue_scripts', array( $this, 'register_assets' ) );
 	}
 
 	/**
@@ -78,47 +78,63 @@ class SVECP_Social_Venues {
 		$this->services = array(
 			'facebook'	=> array(
 				'label'				=> __( 'Facebook', SVECP_TEXTDOMAIN ),
-				'html'				=> '<i class="fa fa-2x fa-facebook"></i>'
+				'html'				=> '<span class="socicon">b</span>'
 			),
 			'twitter'		=> array(
 				'label'				=> __( 'Twitter', SVECP_TEXTDOMAIN ),
-				'html'				=> '<i class="fa fa-2x fa-twitter"></i>'
+				'html'				=> '<span class="socicon">a</span>'
 			),
 			'google_plus'	=> array(
 				'label'				=> __( 'Google Plus', SVECP_TEXTDOMAIN ),
-				'html'				=> '<i class="fa fa-2x fa-google-plus"></i>'
+				'html'				=> '<span class="socicon">c</span>'
 			),
 			'youtube'		=> array(
 				'label'				=> __( 'YouTube', SVECP_TEXTDOMAIN ),
-				'html'				=> '<i class="fa fa-2x fa-youtube"></i>'
+				'html'				=> '<span class="socicon">r</span>'
 			),
 			'flickr'		=> array(
 				'label'				=> __( 'Flickr', SVECP_TEXTDOMAIN ),
-				'html'				=> '<i class="fa fa-2x fa-flickr"></i>'
+				'html'				=> '<span class="socicon">v</span>'
 			),
 			'pinterest'		=> array(
 				'label'				=> __( 'Pinterest', SVECP_TEXTDOMAIN ),
-				'html'				=> '<i class="fa fa-2x fa-pinterest"></i>'
+				'html'				=> '<span class="socicon">d</span>'
 			),
 			'foursquare'		=> array(
 				'label'				=> __( 'Foursquare', SVECP_TEXTDOMAIN ),
-				'html'				=> '<i class="fa fa-2x fa-foursquare"></i>'
+				'html'				=> '<span class="socicon">e</span>'
 			),
 			'instagram'		=> array(
 				'label'				=> __( 'Instagram', SVECP_TEXTDOMAIN ),
-				'html'				=> '<i class="fa fa-2x fa-instagram"></i>'
+				'html'				=> '<span class="socicon">x</span>'
 			),
 			'linkedin'		=> array(
 				'label'				=> __( 'LinkedIn', SVECP_TEXTDOMAIN ),
-				'html'				=> '<i class="fa fa-2x fa-linkedin"></i>'
+				'html'				=> '<span class="socicon">j</span>'
 			),
 			'vimeo'		=> array(
 				'label'				=> __( 'Vimeo', SVECP_TEXTDOMAIN ),
-				'html'				=> '<i class="fa fa-2x fa-vimeo-square"></i>'
+				'html'				=> '<span class="socicon">s</span>'
 			),
-			'weibo'		=> array(
-				'label'				=> __( 'Weibo', SVECP_TEXTDOMAIN ),
-				'html'				=> '<i class="fa fa-2x fa-weibo"></i>'
+			'skype'		=> array(
+				'label'				=> __( 'Skype', SVECP_TEXTDOMAIN ),
+				'html'				=> '<span class="socicon">g</span>'
+			),
+			'yelp'		=> array(
+				'label'				=> __( 'Yelp', SVECP_TEXTDOMAIN ),
+				'html'				=> '<span class="socicon">h</span>'
+			),
+			'myspace'		=> array(
+				'label'				=> __( 'MySpace', SVECP_TEXTDOMAIN ),
+				'html'				=> '<span class="socicon">m</span>'
+			),
+			'soundcloud'		=> array(
+				'label'				=> __( 'SoundCloud', SVECP_TEXTDOMAIN ),
+				'html'				=> '<span class="socicon">n</span>'
+			),
+			'lanyrd'		=> array(
+				'label'				=> __( 'Lanyrd', SVECP_TEXTDOMAIN ),
+				'html'				=> '<span class="socicon">7</span>'
 			)
 		);
 
@@ -214,6 +230,8 @@ class SVECP_Social_Venues {
 		global $post;
 
 		$this->load_meta_data();
+		
+		$this->enqueue_assets();
 
 		?>
 
@@ -397,8 +415,8 @@ class SVECP_Social_Venues {
 	public function register_assets() {
 		$this->stylesheets = array(
 			array(
-				'handle'	=> 'font-awesome',
-				'url'		=> '//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css'
+				'handle'	=> 'svecp-styles',
+				'url'		=> SVECP_PLUGIN_URL . '/assets/css/stylesheet.css'
 			),
 		);
 
@@ -407,25 +425,8 @@ class SVECP_Social_Venues {
 		foreach ( $this->stylesheets as $stylesheet ) {
 			wp_register_style( $stylesheet['handle'], $stylesheet['url'] );
 		}
-	}
 
-	/**
-	 * Enqueue front-end styles
-	 * @since 1.0
-	 */
-	public function enqueue_assets() {
-		foreach ( $this->stylesheets as $stylesheet ) {
-			wp_enqueue_style( $stylesheet['handle'] );
-		}
-	}
-
-	/**
-	 * Register admin scripts and styles
-	 * @since 1.0
-	 */
-	public function enqueue_admin_assets() {
-		wp_enqueue_style( 'svecp-admin-style', SVECP_PLUGIN_URL . '/assets/css/admin.css' );
-		wp_enqueue_script( 'svecp-admin', SVECP_PLUGIN_URL . '/assets/js/admin.js', array( 'jquery' ) );
+		wp_register_script( 'svecp-admin', SVECP_PLUGIN_URL . '/assets/js/admin.js', array( 'jquery' ) );
 		wp_localize_script(
 			'svecp-admin',
 			'wp_data',
@@ -433,6 +434,20 @@ class SVECP_Social_Venues {
 				'network_template' => $this->get_profile_input_template()
 			)
 		);
+	}
+
+	/**
+	 * Enqueue styles and scripts
+	 * @since 1.0
+	 */
+	public function enqueue_assets() {
+		foreach ( $this->stylesheets as $stylesheet ) {
+			wp_enqueue_style( $stylesheet['handle'] );
+		}
+		
+		if ( is_admin() ) {
+			wp_enqueue_script( 'svecp-admin' );
+		}
 	}
 
 	/**

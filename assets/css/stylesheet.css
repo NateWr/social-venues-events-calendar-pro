@@ -1,0 +1,56 @@
+/**
+ * Load the icon font and set up the display parameters
+ */
+@font-face {
+    font-family: 'socicon';
+    src: url('../fonts/socicon-webfont.eot');
+    src: url('../fonts/socicon-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/socicon-webfont.woff') format('woff'),
+         url('../fonts/socicon-webfont.ttf') format('truetype'),
+         url('../fonts/socicon-webfont.svg#sociconregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.socicon {
+	position: relative;
+	top: 1px;
+	display: inline-block;
+	font-family: 'socicon';
+	font-style: normal;
+	font-weight: normal;
+	-webkit-font-smoothing: antialiased;
+	font-size: 1.5em;
+	line-height: 1.5em;
+	width: 1.5em;
+	text-align: center;
+}
+
+.socicon:empty{
+	width: 1em;
+}
+
+/**
+ * Admin controls
+ */
+#svecp_social_profiles .svecp_service {
+	padding-bottom: 1em;
+	margin-bottom: 1em;
+	border-bottom: 1px solid #eee;
+}
+#svecp_social_profiles label,
+#svecp_social_profiles input[type="text"],
+#svecp_social_profiles select,
+#svecp_social_profiles p {
+	margin: 1em;
+	display: block;
+}
+#svecp_social_profiles label {
+	font-weight: bold;
+}
+#svecp_social_profiles .svecp-delete {
+	color: #a00;
+}
+#svecp_social_profiles .svecp-delete:hover {
+	color: red;
+}

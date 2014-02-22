@@ -5,7 +5,7 @@ Plugin URL: http://themeofthecrop.com
 Tags: calendar, class, concert, conference, date, dates, event, events, google maps, meeting, modern tribe, Organizer, seminar, summit, tribe, venue, widget, workshop
 Requires at least: 3.8
 Tested up to: 3.8.1
-Stable tag: 1.0.2
+Stable tag: 1.1
 License: GPLv2 or later
 Donate link: http://themeofthecrop.com
 
@@ -29,9 +29,12 @@ This plugin adds a new meta box to the venue editing page, which allows you to a
 * Instagram
 * LinkedIn
 * Vimeo
-* Weibo
-
-This plugin deliberately does not include specific stylesheets to customize the output. If you want some basic CSS to use, see the FAQ page.
+* Skype
+* Yelp
+* MySpace
+* SoundCloud
+* Lanyrd
+* Missing one you need? [Let me know](http://themeofthecrop.com/support/?utm_source=Plugin&utm_medium=Plugin%20Description&utm_campaign=Social%20Venues%20for%20Events%20Calendar "Support at Theme of the Crop")
 
 Please note that this plugin **will not work** with the free version of [Events Calendar](http://wordpress.org/plugins/the-events-calendar/ "View Events Calendar on the WordPress plugin repository"). It requires the ability to have saved venues, which is only available in the [pro version ](http://tri.be/shop/wordpress-events-calendar-pro/ "Purchase Events Calendar Pro") of the plugin.
 
@@ -41,7 +44,7 @@ Once you have installed and activated this plugin, go to the page where you can 
 
 = Developers =
 
-This plugin uses the font icons from [Font Awesome](http://fortawesome.github.io/Font-Awesome/ "Icon font for the web") to display social media icons. The selection of available networks is based on the icons available in this pack.
+This plugin uses the [Socicon](http://socicon.com/ "Socicon - an icon font for social networks") font to display the icons. It supports many more social networks than I've included here, so if you're missing one let me know. It can be added easily if the Socicon font supports it.
 
 However, this plugin provides filters so you can easily customize and extend it for your particular needs. These filters allow you to:
 
@@ -62,16 +65,6 @@ This plugin is [on GitHub](https://github.com/NateWr/social-venues-events-calend
 5. Find the Social Media Profiles input panel below the Venue Information panel
 
 == Frequently Asked Questions ==
-
-= The icons don't display pretty. =
-
-I've deliberately not included a separate stylesheet with styles for the icons. This will prevent another call to your server for such a tiny file. But if you want something a bit nicer and you don't know CSS well, add this to your theme's style.css file:
-
-`.svecp-icon {
-	min-width: 2.5em;
-	display: inline-block;
-	text-align: center;
-}`
 
 = Can I add another social network or use different icons? =
 
@@ -110,7 +103,7 @@ function my_new_network_function( $services ) {
 }
 add_filter( 'svecp_services', 'my_new_network_function' );`
 
-If you don't want to use the FontAwesome icons, you can prevent the stylesheet from being loaded with the following code:
+If you don't want to use the Socicon font for icons, you can prevent the stylesheet from being loaded with the following code:
 
 `/**
  * Prevent FontAwesome stylesheet from loading
@@ -119,7 +112,7 @@ function my_custom_stylesheets_function( $stylesheets ) {
 
 	$new_stylesheets = array();
 	foreach( $stylesheets as $stylesheet ) {
-		if ( $stylesheet['handle'] != 'font-awesome' ) {
+		if ( $stylesheet['handle'] != 'svecp-styles' ) {
 			$new_stylesheets[] = $stylesheet;
 		}
 	}
@@ -143,8 +136,16 @@ What do you want? I think this plugin works best if it's kept nice and simple, b
 
 == Changelog ==
 
+= 1.1 (2014-02-21) =
+* Switched from loading Font Awesome from CDN to loading a self-hosted Socicon font to comply with WordPress.org repository guidelines
+
 = 1.0.2 (2014-01-29) =
 * Two version bumps to fix issues in WordPress repository
 
 = 1.0 (2014-01-27) =
 * Initial release
+
+== Upgrade Notice ==
+
+= 1.1 =
+This version changes the font icon that is used to display the social media icons. As part of this change, support for the Weibo network is no longer available. My apologies.
