@@ -47,7 +47,7 @@ class SVECP_Social_Venues {
 		// Init
 		add_action( 'init', array( $this, 'load_textdomain' ) );
 		add_action( 'init', array( $this, 'define_services' ) );
-		add_action( 'init', array( $this, 'check_dependencies' ) );
+		add_action( 'admin_init', array( $this, 'check_dependencies' ) );
 
 		// Handle Meta Boxes
 		add_action( 'add_meta_boxes', array( $this, 'add_meta_boxes' ) );
