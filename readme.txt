@@ -5,7 +5,7 @@ Plugin URL: http://themeofthecrop.com
 Tags: calendar, class, concert, conference, date, dates, event, events, google maps, meeting, modern tribe, Organizer, seminar, summit, tribe, venue, widget, workshop
 Requires at least: 3.8
 Tested up to: 3.8.1
-Stable tag: 1.1
+Stable tag: 1.2
 License: GPLv2 or later
 Donate link: http://themeofthecrop.com
 
@@ -50,7 +50,8 @@ However, this plugin provides filters so you can easily customize and extend it 
 
 * Customize which social networks can be selected and the HTML output for each network
 * Add or remove CSS stylesheets that are loaded on the front-end
-* Customize the default metadata and settings.
+* Customize the default metadata and settings
+* Attach the output to any template action hook
 
 Read the FAQ page for a few tips and [get in touch](http://themeofthecrop.com/support/?utm_source=Plugin&utm_medium=Plugin%20Description&utm_campaign=Social%20Venues%20for%20Events%20Calendar "Support at Theme of the Crop") if you have any questions.
 
@@ -65,6 +66,21 @@ This plugin is [on GitHub](https://github.com/NateWr/social-venues-events-calend
 5. Find the Social Media Profiles input panel below the Venue Information panel
 
 == Frequently Asked Questions ==
+
+= Can I change where the icons appear on my venue pages? =
+
+Yes. The plugin automatically appends them to the end of the venue's description. If no description exists, it will append them to the title. However, you can attach them to any custom action hook with the following code:
+
+`/**
+ * This function attaches social media icons after 
+ * the venue meta data (address, phone, etc), using
+ * a custom action hook that is part of the default
+ * templates provided by Events Calendar Pro.
+ */
+function my_custom_profiles_hook( $custom_action ) {
+	$custom_action = 'tribe_events_single_venue_after_the_meta';
+}
+add_filter( 'svecp_custom_action', 'my_custom_profiles_hook');`
 
 = Can I add another social network or use different icons? =
 
@@ -136,6 +152,10 @@ What do you want? I think this plugin works best if it's kept nice and simple, b
 
 == Changelog ==
 
+= 1.2 (2014-02-26) =
+* Fix a critical bug when a plugin function was called before the functions were loaded
+* Added an output fallback in case a venue has no description
+
 = 1.1 (2014-02-21) =
 * Switched from loading Font Awesome from CDN to loading a self-hosted Socicon font to comply with WordPress.org repository guidelines
 
@@ -146,6 +166,9 @@ What do you want? I think this plugin works best if it's kept nice and simple, b
 * Initial release
 
 == Upgrade Notice ==
+
+= 1.2 =
+This version fixes a critical bug that could appear when the plugin is activated and provides a fallback for displaying the icons in some cases where they wouldn't appear.
 
 = 1.1 =
 This version changes the font icon that is used to display the social media icons. As part of this change, support for the Weibo network is no longer available. My apologies.
