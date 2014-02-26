@@ -31,7 +31,10 @@ class SVECP_Social_Venues {
 	public $stylesheets = array();
 
 	// HTML output for the profile links
-	public $profile_links = '';
+	public $profile_links = false;
+	
+	// ID of the post the generated profile links are attached to
+	public $profile_links_post_id = false;
 
 	/**
 	 * Constructor for the class
@@ -54,7 +57,7 @@ class SVECP_Social_Venues {
 		add_action( 'save_post', array( $this, 'save_meta_boxes' ) );
 
 		// Frontend display
-		add_filter( 'the_content', array( $this, 'add_profile_links_to_content' ) );
+		add_action( 'the_post', array( $this, 'choose_content_location' ) );
 		add_action( 'wp_enqueue_scripts', array( $this, 'register_assets' ) );
 
 		// Admin scripts and styles
@@ -230,7 +233,7 @@ class SVECP_Social_Venues {
 		global $post;
 
 		$this->load_meta_data();
-		
+
 		$this->enqueue_assets();
 
 		?>
@@ -349,6 +352,49 @@ class SVECP_Social_Venues {
 	}
 
 	/**
+	 * Determine where to hook in the social profile links on the venue page.
+	 *
+	 * Developers can specify a custom hook, but it falls back to appending to
+	 * the_content or the_title.
+	 * @since 1.2
+	 */
+	public function choose_content_location() {
+		global $post;
+
+		if ( SVECP_VENUE_POST_TYPE !== $post->post_type || !is_main_query() ) {
+			return;
+		}
+		
+		$custom_action = apply_filters( 'svecp_custom_action', null );
+		
+		if ( isset( $custom_action ) ) {
+			add_action( $custom_action, array( $this, 'add_profile_links_in_action' ) );
+		} elseif ( get_the_content() ) {
+			add_filter( 'the_content', array( $this, 'add_profile_links_to_content' ) );
+		} else {
+			add_filter( 'the_title', array( $this, 'add_profile_links_to_title' ), 10, 2 );
+		}
+	}
+
+	/**
+	 * Add the social profile links to the venue content
+	 * @param  string $title Post title
+	 * @param  string $id Post id
+	 * @return string Ammended post title
+	 * @since 1.0
+	 */
+	public function add_profile_links_to_title( $title, $id ) {
+
+		$this->generate_profile_links();
+
+		if ( $this->profile_links !== false && $this->profile_links_post_id == $id ) {
+			$title .= $this->profile_links;
+		}
+
+		return $title;
+	}
+
+	/**
 	 * Add the social profile links to the venue content
 	 * @param  string $content Post content
 	 * @return string Ammended post content
@@ -357,14 +403,44 @@ class SVECP_Social_Venues {
 	public function add_profile_links_to_content( $content ) {
 		global $post;
 
+		$this->generate_profile_links();
+
+		if ( $this->profile_links !== false && $this->profile_links_post_id == $post->ID ) {
+			$content .= $this->profile_links;
+		}
+
+		return $content;
+	}
+
+	/**
+	 * Add the social profile links in any custom action
+	 * @since 1.0
+	 */
+	public function add_profile_links_in_action( ) {
+		global $post;
+
+		$this->generate_profile_links();
+
+		if ( $this->profile_links !== false && $this->profile_links_post_id == $post->ID ) {
+			echo $this->profile_links;
+		}
+	}
+
+	/**
+	 * Generate the social profile links HTML markup and enqueue assets
+	 * @since 1.2
+	 */
+	public function generate_profile_links() {
+		global $post;
+
 		if ( SVECP_VENUE_POST_TYPE !== $post->post_type || !is_main_query() ) {
-			return $content;
+			return;
 		}
 
 		$this->load_meta_data();
 
 		if ( !count( $this->meta_data['profiles'] ) ) {
-			return $content;
+			return;
 		}
 
 		$this->enqueue_assets();
@@ -399,13 +475,14 @@ class SVECP_Social_Venues {
 		</div>
 
 		<?php
-
 		$this->profile_links = ob_get_clean();
 		$this->profile_links = apply_filters( 'svecp_frontend_html', $this->profile_links );
-		$content .= $this->profile_links;
 
-		return $content;
-
+		// Save the post id these links are attached to, so we can compare and
+		// prevent them from displaying alongside other post content
+		if ( $this->profile_links !== false ) {
+			$this->profile_links_post_id = $post->ID;
+		}
 	}
 
 	/**
@@ -444,7 +521,7 @@ class SVECP_Social_Venues {
 		foreach ( $this->stylesheets as $stylesheet ) {
 			wp_enqueue_style( $stylesheet['handle'] );
 		}
-		
+
 		if ( is_admin() ) {
 			wp_enqueue_script( 'svecp-admin' );
 		}
