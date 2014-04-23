@@ -4,7 +4,7 @@ Author URI: https://github.com/NateWr
 Plugin URL: http://themeofthecrop.com
 Tags: calendar, class, concert, conference, date, dates, event, events, google maps, meeting, modern tribe, Organizer, seminar, summit, tribe, venue, widget, workshop
 Requires at least: 3.8
-Tested up to: 3.8.1
+Tested up to: 3.9
 Stable tag: 1.2
 License: GPLv2 or later
 Donate link: http://themeofthecrop.com
