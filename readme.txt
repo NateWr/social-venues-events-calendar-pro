@@ -5,7 +5,7 @@ Plugin URL: http://themeofthecrop.com
 Tags: calendar, class, concert, conference, date, dates, event, events, google maps, meeting, modern tribe, Organizer, seminar, summit, tribe, venue, widget, workshop
 Requires at least: 3.8
 Tested up to: 3.9
-Stable tag: 1.2
+Stable tag: 1.2.1
 License: GPLv2 or later
 Donate link: http://themeofthecrop.com
 
@@ -152,6 +152,9 @@ What do you want? I think this plugin works best if it's kept nice and simple, b
 
 == Changelog ==
 
+= 1.2.1 (2014-04-23) =
+* Minor maintenance release
+
 = 1.2 (2014-02-26) =
 * Fix a critical bug when a plugin function was called before the functions were loaded
 * Added an output fallback in case a venue has no description
@@ -166,6 +169,9 @@ What do you want? I think this plugin works best if it's kept nice and simple, b
 * Initial release
 
 == Upgrade Notice ==
+
+= 1.2.1 =
+This minor maintenance upgrade just updates some content for the WordPress.org repository.
 
 = 1.2 =
 This version fixes a critical bug that could appear when the plugin is activated and provides a fallback for displaying the icons in some cases where they wouldn't appear.
