@@ -7,7 +7,7 @@
  * Author: Nate Wright
  * Author URI: https://github.com/NateWr
  * Requires at least: 3.8
- * Tested up to: 3.8
+ * Tested up to: 3.9
  *
  * Text Domain: svecp_social_venues
  * Domain Path: /languages/
